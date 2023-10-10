@@ -20,7 +20,6 @@
     "qs": "^6.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-intersection-observer": "^9.5.2",
     "react-moveable": "^0.54.2",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
