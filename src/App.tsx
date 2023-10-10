@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo, useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { MemeContext } from './context/MemeContext'
+import { MemeTemplate } from './interfaces/Meme'
+import Editor from './pages/Editor/Editor'
+import Layout from './components/Layout/Layout'
+import Home from './pages/Home/Home'
+import './App.css'
+
+const queryClient = new QueryClient()
 
 function App() {
+  const [selectedMemeTemplate, setSelectedMeme] = useState<MemeTemplate | null>(null)
+
+  const memoizedValue = useMemo(
+    () => ({ selectedMemeTemplate, setSelectedMeme }),
+    [selectedMemeTemplate],
+  )
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <QueryClientProvider client={queryClient}>
+      <MemeContext.Provider value={memoizedValue}>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/editor" element={<Editor />} />
+          </Routes>
+        </Layout>
+      </MemeContext.Provider>
+    </QueryClientProvider>
+  )
 }
 
-export default App;
+export default App
