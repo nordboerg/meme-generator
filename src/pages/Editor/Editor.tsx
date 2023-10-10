@@ -40,7 +40,7 @@ const Editor = () => {
   }, [])
 
   // hide the edges of the control box if the download dialog is open.
-  // otherwise the edges are visible over the backdrop dialog component
+  // otherwise the edges are visible over the backdrop of the dialog component
   useEffect(() => {
     setIsHideEdges(isDialogOpen)
   }, [isDialogOpen])
