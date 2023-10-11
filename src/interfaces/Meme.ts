@@ -35,6 +35,11 @@ export interface GenerateMemeRequest {
 }
 
 export interface GenerateMemeResponse {
-  success: string
+  success: boolean
   data: GeneratedMeme
+}
+
+export interface GenerateMemeError {
+  success: boolean
+  error_message: string
 }

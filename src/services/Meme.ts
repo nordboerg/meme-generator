@@ -6,6 +6,7 @@ import {
   MemeTemplate,
   MemeTemplateResponse,
   GenerateMemeResponse,
+  GenerateMemeError,
 } from '../interfaces/Meme'
 
 const BASE_URL: string = 'https://api.imgflip.com'
@@ -30,13 +31,18 @@ export const getGeneratedMeme = async (
       password: '2Pk63S$2KnSmBqk',
     }
 
-    const response = await axios.post<GenerateMemeResponse>(
+    const response = await axios.post<GenerateMemeResponse | GenerateMemeError>(
       BASE_URL + '/caption_image',
       qs.stringify(request),
     )
 
-    return response.data.data
+    if ('data' in response.data) {
+      return response.data.data
+    } else {
+      throw new Error(response.data.error_message)
+    }
   } catch (error) {
     console.error(error)
+    throw error
   }
 }

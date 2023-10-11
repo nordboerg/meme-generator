@@ -9,6 +9,7 @@ import ContrastIcon from '@mui/icons-material/Contrast'
 import IconButton from '@mui/material/IconButton'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
+import Alert from '@mui/material/Alert'
 import MovableCaption from '../../components/MovableCaption/MovableCaption'
 import '../../App.css'
 import { useCaption } from './useCaption'
@@ -27,7 +28,7 @@ const Editor = () => {
   const [memeUrl, setMemeUrl] = useState('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isHideEdges, setIsHideEdges] = useState(false)
-
+  const [error, setError] = useState('')
   const dragTargetRefs = useRef<{ [key: string]: HTMLDivElement | null }>({})
   const dragContainerRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
@@ -76,9 +77,12 @@ const Editor = () => {
           if (response?.url) {
             setMemeUrl(response.url)
             setIsDialogOpen(true)
+            setError('')
           }
         })
-        .catch(console.error)
+        .catch((error) => {
+          setError(error.message + ' You likely need to specify more captions to generate this meme.')
+        })
         .finally(() => setIsLoading(false))
     }
   }
@@ -86,6 +90,7 @@ const Editor = () => {
   return (
     <>
       <h1>Add your captions</h1>
+      {error && <Alert severity="error">{error}</Alert>}
       <Grid container spacing={2}>
         <Grid xs={12} md={8}>
           <div
