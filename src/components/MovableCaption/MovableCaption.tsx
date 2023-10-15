@@ -38,24 +38,23 @@ const MovableCaption = forwardRef<HTMLDivElement | null, Props>(function Movable
 ) {
   return (
     <>
-      {text && (
-        <div
-          ref={ref}
-          style={{
-            position: 'absolute',
-            top: index * 64,
-            left: 0,
-            width: isMobile ? 200 : 400,
-            height: isMobile ? 96 : 128,
-            fontSize: isMobile ? 32 : 48,
-            lineHeight: 1,
-            color: color,
-            transform: 'translate(0px, 0px)',
-          }}
-        >
-          {text}
-        </div>
-      )}
+      <div
+        ref={ref}
+        style={{
+          position: 'absolute',
+          display: text ? 'initial' : 'none',
+          top: index * 64,
+          left: 0,
+          width: isMobile ? 200 : 400,
+          height: isMobile ? 96 : 128,
+          fontSize: isMobile ? 32 : 48,
+          lineHeight: 1,
+          color: color,
+          transform: 'translate(0px, 0px)',
+        }}
+      >
+        {text}
+      </div>
       <Moveable
         target={targetRef}
         draggable={isPositioningEnabled}
@@ -64,7 +63,7 @@ const MovableCaption = forwardRef<HTMLDivElement | null, Props>(function Movable
         edgeDraggable={false}
         keepRatio={false}
         snappable={true}
-        zoom={isHideEdges ? 0 : 1}
+        zoom={!text || isHideEdges ? 0 : 1}
         resizable={isPositioningEnabled}
         bounds={{ left: 0, top: 0, right: 0, bottom: 0, position: 'css' }}
         onDrag={(e) => {
