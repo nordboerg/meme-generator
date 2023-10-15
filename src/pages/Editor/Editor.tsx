@@ -81,7 +81,10 @@ const Editor = () => {
           }
         })
         .catch((error) => {
-          setError(error.message + ' You likely need to specify more captions to generate this meme.')
+          setError(
+            error.message +
+              ' You likely need to specify more captions to generate this meme.',
+          )
         })
         .finally(() => setIsLoading(false))
     }

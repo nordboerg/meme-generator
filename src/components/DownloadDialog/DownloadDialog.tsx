@@ -33,7 +33,7 @@ const DownloadDialog = ({ memeUrl, setIsDialogOpen }: Props) => {
         <CloseIcon />
       </IconButton>
       <DialogContent>
-        <img src={memeUrl} alt="" style={{ width: '100%'}} />
+        <img src={memeUrl} alt="" style={{ width: '100%' }} />
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={onSave}>
