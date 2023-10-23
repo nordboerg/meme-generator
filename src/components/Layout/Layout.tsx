@@ -16,10 +16,10 @@ export const isMobile = window.innerWidth <= 425
 const CustomContainer = styled(Container, {
   shouldForwardProp: (prop) => prop !== 'isMobile',
 })<ContainerWithProps>(({ isMobile }) => ({
-  marginTop: isMobile ? 0 : 3,
-  paddingTop: 1,
+  marginTop: isMobile ? 0 : 24,
+  paddingTop: 8,
   backgroundColor: '#faf0e6',
-  borderRadius: isMobile ? 0 : 2,
+  borderRadius: isMobile ? 0 : 8,
 }))
 
 const Layout = ({ children }: Props) => {
