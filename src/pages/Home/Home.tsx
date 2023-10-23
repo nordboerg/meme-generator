@@ -1,23 +1,28 @@
-import { useQuery } from 'react-query'
-import { getMemeTemplates } from '../../services/Meme'
+import { Suspense } from 'react'
+import { useQueryErrorResetBoundary } from '@tanstack/react-query'
+import { ErrorBoundary } from 'react-error-boundary'
 import TemplateImageList from '../../components/TemplateImageList/TemplateImageList'
 import '../../App.css'
 
 const Home = () => {
-  const { data: memeTemplates, isLoading, error } = useQuery(['meme'], getMemeTemplates)
-
-  if (isLoading) {
-    return <>Loading...</>
-  }
-
-  if (error) {
-    return <>Something went wrong</>
-  }
+  const { reset } = useQueryErrorResetBoundary()
 
   return (
     <>
       <h1>Choose a meme template</h1>
-      {memeTemplates && <TemplateImageList templates={memeTemplates} />}
+      <ErrorBoundary
+        onReset={reset}
+        fallbackRender={({ resetErrorBoundary }) => (
+          <div>
+            There was an error!
+            <button onClick={() => resetErrorBoundary()}>Try again</button>
+          </div>
+        )}
+      >
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <TemplateImageList />
+        </Suspense>
+      </ErrorBoundary>
     </>
   )
 }

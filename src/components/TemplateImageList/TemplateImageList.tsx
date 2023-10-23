@@ -1,17 +1,20 @@
 import React from 'react'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import ImageList from '@mui/material/ImageList'
-import { MemeTemplate as MemeTemplateI } from '../../interfaces/Meme'
-import TemplateImage from '../TemplateImage/TemplateImage'
 import { isMobile } from '../Layout/Layout'
+import TemplateImage from '../TemplateImage/TemplateImage'
+import { getMemeTemplates } from '../../services/Meme'
 
-interface Props {
-  templates: MemeTemplateI[]
-}
+const TemplateImageList = () => {
+  const { data: memeTemplates } = useSuspenseQuery({
+    queryKey: ['meme'],
+    queryFn: getMemeTemplates,
+    staleTime: 1000 * 60 * 10,
+  })
 
-const TemplateImageList = ({ templates }: Props) => {
   return (
     <ImageList cols={isMobile ? 3 : 4} gap={8}>
-      {templates.map((template) => (
+      {memeTemplates!.map((template) => (
         <React.Fragment key={template.id}>
           <TemplateImage template={template} />
         </React.Fragment>
