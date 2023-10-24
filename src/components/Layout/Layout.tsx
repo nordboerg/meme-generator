@@ -17,7 +17,7 @@ const CustomContainer = styled(Container, {
   shouldForwardProp: (prop) => prop !== 'isMobile',
 })<ContainerWithProps>(({ isMobile }) => ({
   marginTop: isMobile ? 0 : 24,
-  paddingTop: 8,
+  padding: '8px 0',
   backgroundColor: '#faf0e6',
   borderRadius: isMobile ? 0 : 8,
 }))

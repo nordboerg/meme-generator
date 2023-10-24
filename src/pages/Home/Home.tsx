@@ -19,7 +19,7 @@ const Home = () => {
           </div>
         )}
       >
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<h3>Fetching templates...</h3>}>
           <TemplateImageList />
         </Suspense>
       </ErrorBoundary>

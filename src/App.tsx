@@ -1,13 +1,14 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import CircularProgress from '@mui/material/CircularProgress'
 import { MemeContext } from './context/MemeContext'
 import { MemeTemplate } from './interfaces/Meme'
-import Editor from './pages/Editor/Editor'
 import Layout from './components/Layout/Layout'
 import Home from './pages/Home/Home'
 import './App.css'
 
+const Editor = lazy(() => import('./pages/Editor/Editor'))
 const queryClient = new QueryClient()
 
 function App() {
@@ -22,10 +23,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <MemeContext.Provider value={memoizedValue}>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/editor" element={<Editor />} />
-          </Routes>
+          <Suspense fallback={<CircularProgress />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/editor" element={<Editor />} />
+            </Routes>
+          </Suspense>
         </Layout>
       </MemeContext.Provider>
     </QueryClientProvider>
