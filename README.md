@@ -1,6 +1,9 @@
 # Meme Generator
 
 Hi there! This is a sample typescript React app utilising the [Imgflip API](https://imgflip.com/api) to fetch meme templates and generate memes.
+
+Once a meme template is selected, the editor page generates as many input boxes as the selected template supports and enables the user to freely position the captions. The custom positioning can be used as a preview as well. If the option is deselected, the meme will be generated with the pre-defined caption positions on the server (includes default positions, rotation, styling, etc).
+
 It uses the following techniques and libraries:
 
 - Code splitting with React lazy and Suspense
