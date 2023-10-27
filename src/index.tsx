@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/meme-generator">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
