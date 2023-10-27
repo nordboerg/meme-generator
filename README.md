@@ -13,3 +13,4 @@ It uses the following techniques and libraries:
 - React router v6.16
 - Material UI / styled component using the styled() utility with custom props
 - Custom caption positioning with react-moveable
+- Uses Vite as the build tool
