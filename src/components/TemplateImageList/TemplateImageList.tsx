@@ -14,9 +14,9 @@ const TemplateImageList = () => {
 
   return (
     <ImageList cols={isMobile ? 3 : 4} gap={8}>
-      {memeTemplates!.map((template) => (
+      {memeTemplates!.map((template, index) => (
         <React.Fragment key={template.id}>
-          <TemplateImage template={template} />
+          <TemplateImage template={template} index={index} />
         </React.Fragment>
       ))}
     </ImageList>
